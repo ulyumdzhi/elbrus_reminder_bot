@@ -1,13 +1,13 @@
 import time
 import logging
+import asyncio
 
 from aiogram import Bot, Dispatcher, executor, types
 
-logging.basicConfig(level=logging.INFO)
-                     
-                    
 TOKEN = "здесьбудетваштокенот@BotFather"
 MSG = "Программировал ли ты сегодня, {}?"
+
+logging.basicConfig(level=logging.INFO)
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot=bot)
@@ -21,9 +21,10 @@ async def start_handler(message: types.Message):
     await message.reply(f"Привет, {user_full_name}!")
     
     for i in range(7):
-        time.sleep(60*60*24)
+        await asyncio.sleep(60*60*24)  # асинхронный вариант
+        # time.sleep(60*60*24)  # синхронный для одного пользователя
         await bot.send_message(user_id, MSG.format(user_name))
 
 
-if __name__ == '__main__':
+if __name__ == '__main__': 
     executor.start_polling(dp)

@@ -1,4 +1,3 @@
-import time
 import logging
 import asyncio
 
@@ -22,7 +21,6 @@ async def start_handler(message: types.Message):
     
     for i in range(7):
         await asyncio.sleep(60*60*24)  # асинхронный вариант
-        # time.sleep(60*60*24)  # синхронный для одного пользователя
         await bot.send_message(user_id, MSG.format(user_name))
 
 
